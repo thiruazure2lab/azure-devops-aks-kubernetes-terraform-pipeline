@@ -32,7 +32,7 @@ stages:
         displayName: Terraform Install
         inputs:
           terraformVersion: 'latest'
-      - task: TerraformCLI@0
+      - task: TerraformTaskV4@4
         displayName: Terraform Init
         inputs:
           command: 'init'
@@ -44,7 +44,7 @@ stages:
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'aks-base.tfstate'
           allowTelemetryCollection: false
-      - task: TerraformCLI@0
+      - task: TerraformTaskV4@4
         displayName: Terraform Validate
         inputs:
           command: 'validate'
@@ -75,7 +75,7 @@ stages:
               name: sshkey
               inputs:
                 secureFile: 'aks-terraform-devops-ssh-key-ububtu.pub'
-            - task: TerraformCLI@0
+            - task: TerraformTaskV4@4
               displayName: Terraform Init
               inputs:
                 command: 'init'
@@ -87,7 +87,7 @@ stages:
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false
-            - task: TerraformCLI@0
+            - task: TerraformTaskV4@4
               displayName: Terraform Plan
               inputs:
                 command: 'plan'
@@ -95,7 +95,7 @@ stages:
                 environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
-            - task: TerraformCLI@0
+            - task: TerraformTaskV4@4
               displayName: Terraform Apply
               inputs:
                 command: 'apply'
@@ -126,7 +126,7 @@ stages:
               name: sshkey
               inputs:
                 secureFile: 'aks-terraform-devops-ssh-key-ububtu.pub'
-            - task: TerraformCLI@0
+            - task: TerraformTaskV4@4
               displayName: Terraform Init
               inputs:
                 command: 'init'
@@ -138,7 +138,7 @@ stages:
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(QA_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false
-            - task: TerraformCLI@0
+            - task: TerraformTaskV4@4
               displayName: Terraform Plan
               inputs:
                 command: 'plan'
@@ -146,7 +146,7 @@ stages:
                 environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(QA_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
-            - task: TerraformCLI@0
+            - task: TerraformTaskV4@4
               displayName: Terraform Apply
               inputs:
                 command: 'apply'
