@@ -90,19 +90,19 @@ stages:
             - task: TerraformTaskV4@4
               displayName: Terraform Plan
               inputs:
+                provider: 'azurerm'
                 command: 'plan'
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
+                environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
             - task: TerraformTaskV4@4
               displayName: Terraform Apply
               inputs:
+                provider: 'azurerm'
                 command: 'apply'
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
+                environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
 
 # Stage-2: Deploy Stages for Dev & QA
 # Deployment-2: Deploy QA AKS Cluster
@@ -141,16 +141,16 @@ stages:
             - task: TerraformTaskV4@4
               displayName: Terraform Plan
               inputs:
+                provider: 'azurerm'
                 command: 'plan'
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(QA_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
+                environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
             - task: TerraformTaskV4@4
               displayName: Terraform Apply
               inputs:
+                provider: 'azurerm'
                 command: 'apply'
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
+                environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
