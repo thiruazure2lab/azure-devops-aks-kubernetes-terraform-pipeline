@@ -5,11 +5,13 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   resource_group_name = azurerm_resource_group.aks_rg.name
   kubernetes_version  = data.azurerm_kubernetes_service_versions.current.latest_version
   node_resource_group = "${azurerm_resource_group.aks_rg.name}-nrg"
+  # Add On Profiles
   role_based_access_control_enabled = true
   http_application_routing_enabled =  true
   azure_policy_enabled = true
   cost_analysis_enabled = true
-
+  
+  # Add On Profiles
   azure_active_directory_role_based_access_control {
     managed = true
     admin_group_object_ids = azuread_group.aks_administrators
@@ -20,7 +22,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 # Identity (System Assigned or Service Principal)
   identity { type = "SystemAssigned" }
 
-# Add On Profiles
+
   default_node_pool {
       name       = "systempool"
       vm_size    = "Standard_DS2_v3"
@@ -60,7 +62,7 @@ linux_profile {
 
 # Network Profile
 network_profile {
-  load_balancer_sku = "Standard"
+  load_balancer_sku = "standard"
   network_plugin = "azure"
 }
 
