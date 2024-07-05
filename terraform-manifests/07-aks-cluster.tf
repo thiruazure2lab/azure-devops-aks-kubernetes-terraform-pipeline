@@ -10,6 +10,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   http_application_routing_enabled =  true
   azure_policy_enabled = true
   cost_analysis_enabled = true
+  sku_tier = "Standard"
   
   
   # Add On Profiles
