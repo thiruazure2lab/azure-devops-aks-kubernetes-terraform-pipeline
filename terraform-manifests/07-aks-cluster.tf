@@ -28,7 +28,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 
   default_node_pool {
       name       = "systempool"
-      vm_size    = "Standard_DS3_v2"
+      vm_size    = "Standard_DS2_v2"
       orchestrator_version = data.azurerm_kubernetes_service_versions.current.latest_version
       enable_auto_scaling  = true
       max_count            = 3
