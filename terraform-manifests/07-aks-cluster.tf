@@ -5,6 +5,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   resource_group_name = azurerm_resource_group.aks_rg.name
   kubernetes_version  = data.azurerm_kubernetes_service_versions.current.latest_version
   node_resource_group = "${azurerm_resource_group.aks_rg.name}-nrg"
+  
   # Add On Profiles
   role_based_access_control_enabled = true
   http_application_routing_enabled =  true
@@ -35,6 +36,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
       min_count            = 1
       os_disk_size_gb      = 30
       type           = "VirtualMachineScaleSets"
+      temporary_name_for_rotation = thiru
       node_labels = {
         "nodepool-type" = "system"
         "environment"   = var.environment
