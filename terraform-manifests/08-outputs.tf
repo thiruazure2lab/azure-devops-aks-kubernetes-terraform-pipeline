@@ -21,6 +21,12 @@ output "versions" {
   value = data.azurerm_kubernetes_service_versions.current.versions
 }
 
+# Azure AKS Versions Datasource
+output "azure_ad_group_id" {
+  value = azuread_group.aks_administrators.object_id
+}
+
+
 output "latest_version" {
   value = data.azurerm_kubernetes_service_versions.current.latest_version
 }

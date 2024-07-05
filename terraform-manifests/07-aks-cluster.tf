@@ -11,11 +11,13 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   azure_policy_enabled = true
   cost_analysis_enabled = true
   
+  
   # Add On Profiles
   azure_active_directory_role_based_access_control {
     managed = true
-    admin_group_object_ids = azuread_group.aks_administrators
-  }
+    #admin_group_object_ids = azuread_group.aks_administrators.owners
+    admin_group_object_ids = azuread_group.aks_administrators.object_id
+      }
   oms_agent {
       log_analytics_workspace_id = azurerm_log_analytics_workspace.insights.id
     }
