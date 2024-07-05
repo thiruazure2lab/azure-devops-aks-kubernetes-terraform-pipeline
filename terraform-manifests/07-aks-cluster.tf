@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
       min_count            = 1
       os_disk_size_gb      = 30
       type           = "VirtualMachineScaleSets"
-      temporary_name_for_rotation = random_pet.aksrandom
+      temporary_name_for_rotation = "thiru_random"
       node_labels = {
         "nodepool-type" = "system"
         "environment"   = var.environment
