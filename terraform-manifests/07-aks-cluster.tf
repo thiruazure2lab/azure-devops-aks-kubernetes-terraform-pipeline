@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   
   # Add On Profiles
   azure_active_directory_role_based_access_control {
-    managed = true
+    # managed = true
     admin_group_object_ids = [azuread_group.aks_administrators.object_id]
     #admin_group_object_ids = "1def9162-cd0e-4bd4-b618-c06c151a1c3b"
       }
